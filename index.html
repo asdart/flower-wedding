@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bloom & Stem — Wedding Floristry</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --color-bg: #FAF7F2;
+      --color-surface: #F0EBE3;
+      --color-primary: #8B7355;
+      --color-text: #1A1613;
+      --color-muted: #9A8E82;
+      --color-dark: #1A1613;
+      --color-white: #FEFDFB;
+      --color-border: #D4CCC0;
+      --font-brand: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+      --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-bg);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; height: auto; object-fit: cover; }
+    a { color: inherit; text-decoration: none; }
+    ul, ol { list-style: none; }
+    button { font: inherit; cursor: pointer; border: none; background: none; }
+    input, textarea { font: inherit; border: none; outline: none; background: none; }
+
+    /* ========= LAYOUT ========= */
+    .wrap {
+      max-width: 1536px;
+      margin: 0 auto;
+      padding-left: clamp(20px, 4vw, 48px);
+      padding-right: clamp(20px, 4vw, 48px);
+    }
+
+    /* ========= DOT ACCENT ========= */
+    .dot {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--color-text);
+      flex-shrink: 0;
+    }
+    .dot-primary {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      flex-shrink: 0;
+    }
+
+    /* ========= SECTION LABEL ========= */
+    .section-label {
+      font-family: var(--font-body);
+      font-size: clamp(0.8rem, 0.7rem + 0.3vw, 1rem);
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      color: var(--color-muted);
+    }
+
+    /* ========= MEGA TYPE ========= */
+    .mega {
+      font-family: var(--font-brand);
+      font-size: clamp(4rem, 3rem + 8vw, 12rem);
+      font-weight: 300;
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+    }
+    .display-xl {
+      font-family: var(--font-brand);
+      font-size: clamp(3rem, 2rem + 5vw, 7rem);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+    }
+    .display-lg {
+      font-family: var(--font-brand);
+      font-size: clamp(2.5rem, 1.5rem + 4vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+    .display-md {
+      font-family: var(--font-brand);
+      font-size: clamp(2rem, 1.2rem + 3.2vw, 4.2rem);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+    .display-sm {
+      font-family: var(--font-brand);
+      font-size: clamp(1.6rem, 1rem + 2.4vw, 3.2rem);
+      font-weight: 400;
+      line-height: 1.15;
+    }
+    .heading-lg {
+      font-family: var(--font-body);
+      font-size: clamp(1.6rem, 1rem + 2.2vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+    .heading-md {
+      font-family: var(--font-body);
+      font-size: clamp(1.3rem, 1rem + 1.2vw, 2.2rem);
+      font-weight: 600;
+      line-height: 1.2;
+    }
+    .heading-sm {
+      font-family: var(--font-body);
+      font-size: clamp(1.1rem, 0.9rem + 0.8vw, 1.6rem);
+      font-weight: 600;
+      line-height: 1.3;
+    }
+    .body-lg {
+      font-family: var(--font-body);
+      font-size: clamp(1.05rem, 0.9rem + 0.6vw, 1.35rem);
+      font-weight: 400;
+      line-height: 1.65;
+    }
+    .body-md {
+      font-family: var(--font-body);
+      font-size: clamp(0.95rem, 0.85rem + 0.4vw, 1.15rem);
+      font-weight: 400;
+      line-height: 1.6;
+    }
+    .body-sm {
+      font-family: var(--font-body);
+      font-size: clamp(0.8rem, 0.75rem + 0.2vw, 0.95rem);
+      font-weight: 400;
+      line-height: 1.5;
+    }
+    .label-lg {
+      font-family: var(--font-body);
+      font-size: clamp(0.75rem, 0.7rem + 0.2vw, 0.9rem);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ========= PILL TAGS ========= */
+    .pill {
+      display: inline-block;
+      padding: 6px 16px;
+      border: 1px solid var(--color-border);
+      border-radius: 100px;
+      font-size: clamp(0.75rem, 0.7rem + 0.15vw, 0.85rem);
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      color: var(--color-muted);
+      white-space: nowrap;
+    }
+
+    /* ========= BUTTONS ========= */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: clamp(0.8rem, 0.75rem + 0.2vw, 0.95rem);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+    .btn-lg { padding: 18px 36px; }
+    .btn-md { padding: 14px 28px; }
+    .btn-sm { padding: 10px 20px; }
+    .btn-primary {
+      background: var(--color-text);
+      color: var(--color-bg);
+      border-color: var(--color-text);
+    }
+    .btn-primary:hover {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--color-text);
+      border-color: var(--color-text);
+    }
+    .btn-ghost:hover {
+      background: var(--color-text);
+      color: var(--color-bg);
+    }
+    .btn-link {
+      padding: 0;
+      border: none;
+      text-decoration: none;
+      position: relative;
+    }
+    .btn-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: currentColor;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+    .btn-link:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    .arrow-icon {
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    .btn:hover .arrow-icon,
+    .btn-link:hover .arrow-icon {
+      transform: translate(3px, -3px);
+    }
+
+    /* ========= FORM ========= */
+    .flat-input {
+      width: 100%;
+      padding: 16px 0;
+      border: none;
+      border-bottom: 1px solid var(--color-border);
+      background: transparent;
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: clamp(0.95rem, 0.85rem + 0.4vw, 1.15rem);
+      font-weight: 300;
+      transition: border-color 0.3s ease;
+    }
+    .flat-input:focus { border-color: var(--color-text); }
+    .flat-input::placeholder { color: var(--color-muted); }
+    textarea.flat-input { resize: vertical; min-height: 100px; }
+
+    /* ========= HORIZONTAL RULE ========= */
+    .hr {
+      width: 100%;
+      height: 1px;
+      background: var(--color-border);
+    }
+
+    /* ========= FAQ ========= */
+    .faq-item { border-bottom: 1px solid var(--color-border); }
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0;
+      cursor: pointer;
+      width: 100%;
+      text-align: left;
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+    .faq-answer.open {
+      max-height: 500px;
+      padding-bottom: 24px;
+    }
+    .faq-chevron {
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+    .faq-chevron.open { transform: rotate(180deg); }
+
+    /* ========= MOBILE MENU ========= */
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: var(--color-bg);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      transform: translateY(-100%);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .mobile-menu.open { transform: translateY(0); }
+
+    /* ========= SERVICE ROW (Colby-style) ========= */
+    .service-row {
+      border-top: 1px solid var(--color-border);
+      padding: 32px 0;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      align-items: center;
+      transition: background 0.3s ease;
+    }
+    .service-row:last-child { border-bottom: 1px solid var(--color-border); }
+    @media (min-width: 768px) {
+      .service-row {
+        grid-template-columns: 1fr 1fr;
+        padding: 40px 0;
+      }
+    }
+
+    /* ========= BENTO GRID ========= */
+    .bento {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 768px) {
+      .bento {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: minmax(280px, auto);
+      }
+      .bento-wide { grid-column: span 2; }
+      .bento-tall { grid-row: span 2; }
+    }
+
+    /* Portfolio bento: equal cell heights (match shorter row, no runaway text) */
+    #portfolio .bento > * {
+      min-height: 320px;
+    }
+    @media (min-width: 768px) {
+      #portfolio .bento {
+        grid-template-rows: repeat(2, 480px);
+        grid-auto-rows: 480px;
+      }
+      #portfolio .bento > * {
+        min-height: 0;
+        height: 100%;
+        max-height: 100%;
+        box-sizing: border-box;
+      }
+      #portfolio .bento > .portfolio-bento-text {
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+    }
+
+    /* ========= RESPONSIVE ========= */
+    @media (max-width: 767px) {
+      .hide-mobile { display: none !important; }
+    }
+    @media (min-width: 768px) {
+      .hide-desktop { display: none !important; }
+    }
+
+    /* ========= ANIMATIONS ========= */
+
+    /* Page-load: header slides down */
+    @keyframes headerReveal {
+      from { transform: translateY(-100%); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+    header {
+      animation: headerReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    /* Hero: staggered fade-up */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(36px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-anim-1 { animation: fadeUp 0.9s 0.1s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .hero-anim-2 { animation: fadeUp 0.9s 0.25s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .hero-anim-3 { animation: fadeUp 0.9s 0.4s  cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .hero-anim-4 { animation: fadeUp 0.9s 0.55s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+    /* Hero image: scale-in from slightly larger */
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(1.06); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    .hero-img-anim { animation: scaleIn 1.1s 0.05s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+    /* Mega brand name: clip-reveal left → right */
+    @keyframes clipReveal {
+      from { clip-path: inset(0 100% 0 0); opacity: 0; }
+      to   { clip-path: inset(0 0%   0 0); opacity: 1; }
+    }
+    .mega-anim { animation: clipReveal 1.1s 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+    /* Scroll-reveal base state */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.reveal-left {
+      transform: translateX(-28px);
+    }
+    .reveal.reveal-right {
+      transform: translateX(28px);
+    }
+    .reveal.reveal-scale {
+      transform: scale(0.96);
+      opacity: 0;
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0) translateX(0) scale(1);
+    }
+
+    /* Stagger children inside a revealed container */
+    .reveal-stagger > * {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-stagger.in-view > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0s;    }
+    .reveal-stagger.in-view > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.1s;  }
+    .reveal-stagger.in-view > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.2s;  }
+    .reveal-stagger.in-view > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.3s;  }
+    .reveal-stagger.in-view > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.4s;  }
+    .reveal-stagger.in-view > *:nth-child(n+6) { opacity: 1; transform: none; transition-delay: 0.5s; }
+
+    /* Respect reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-delay: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+
+<!-- ============================================================
+     SECTION 1: HEADER
+     Sticky nav — logo left, links center-right, hamburger right
+     ============================================================ -->
+<header style="position: sticky; top: 0; z-index: 50; background: rgba(250,247,242,0.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);">
+  <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; height: 72px;">
+    <a href="#" style="font-family: var(--font-brand); font-size: 1.5rem; font-weight: 400; letter-spacing: 0.02em;">Bloom & Stem</a>
+    <nav class="hide-mobile" style="display: flex; gap: 40px; align-items: center;">
+      <a href="#about" class="body-sm" style="color: var(--color-text); transition: color 0.3s;">About</a>
+      <a href="#services" class="body-sm" style="color: var(--color-text); transition: color 0.3s;">Services</a>
+      <a href="#portfolio" class="body-sm" style="color: var(--color-text); transition: color 0.3s;">Portfolio</a>
+      <a href="#contact" class="body-sm" style="color: var(--color-text); transition: color 0.3s;">Contact</a>
+    </nav>
+    <div style="display: flex; align-items: center; gap: 24px;">
+      <a href="#contact" class="btn btn-sm btn-primary hide-mobile">Get started <span class="arrow-icon">&nearr;</span></a>
+      <button class="hide-desktop" onclick="document.getElementById('mobileMenu').classList.toggle('open')" aria-label="Menu" style="display: flex; flex-direction: column; gap: 6px;">
+        <span style="display: block; width: 26px; height: 1.5px; background: var(--color-text);"></span>
+        <span style="display: block; width: 26px; height: 1.5px; background: var(--color-text);"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div id="mobileMenu" class="mobile-menu">
+  <button onclick="document.getElementById('mobileMenu').classList.remove('open')" style="position: absolute; top: 24px; right: 24px;" aria-label="Close">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="4" y1="4" x2="20" y2="20"/><line x1="20" y1="4" x2="4" y2="20"/></svg>
+  </button>
+  <a href="#about" class="display-md" onclick="document.getElementById('mobileMenu').classList.remove('open')">About</a>
+  <a href="#services" class="display-md" onclick="document.getElementById('mobileMenu').classList.remove('open')">Services</a>
+  <a href="#portfolio" class="display-md" onclick="document.getElementById('mobileMenu').classList.remove('open')">Portfolio</a>
+  <a href="#contact" class="display-md" onclick="document.getElementById('mobileMenu').classList.remove('open')">Contact</a>
+</div>
+
+
+<!-- ============================================================
+     SECTION 2: BANNER / HERO
+     Split layout: image placeholder left, bold type right
+     Massive brand name below spanning full width
+     ============================================================ -->
+<section style="padding-top: 20px;">
+  <div class="wrap">
+    <!-- Top split -->
+    <div style="display: grid; grid-template-columns: 1fr; gap: 40px; min-height: 70vh; align-items: center;">
+      <div style="display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center;" class="hero-grid">
+        <style>
+          @media (min-width: 768px) {
+            .hero-grid { grid-template-columns: 1fr 1fr !important; }
+          }
+        </style>
+        <!-- Left: hero image -->
+        <div class="hero-img-anim" style="aspect-ratio: 4/5; position: relative; overflow: hidden;">
+          <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=900&q=80" alt="Bridal bouquet with soft pink and white garden roses" style="width: 100%; height: 100%; object-fit: cover;" />
+        </div>
+        <!-- Right: type -->
+        <div>
+          <p class="display-xl hero-anim-1" style="margin-bottom: 20px;">Seasonal</p>
+          <div class="hero-anim-2" style="display: flex; align-items: center; gap: 20px; margin-bottom: 8px;">
+            <span class="body-md" style="color: var(--color-muted); white-space: nowrap;">Crafted for<br>Your Day</span>
+            <p class="display-xl">Botanical</p>
+          </div>
+          <p class="display-xl hero-anim-3">Wedding Art</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mega brand name -->
+    <div class="mega-anim" style="padding: 60px 0 40px; text-align: center; overflow: hidden;">
+      <p class="mega" style="white-space: nowrap;">
+        <span class="dot-primary" style="vertical-align: super; margin-right: 4px;"></span>BLOOM&STEM<span style="font-size: 0.3em; vertical-align: super; margin-left: 8px;">&reg;</span>
+      </p>
+    </div>
+
+    <!-- Bottom info bar -->
+    <div class="hero-anim-4" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; padding-bottom: 40px; gap: 20px; border-top: 1px solid var(--color-border); padding-top: 20px;">
+      <div>
+        <p class="body-sm" style="font-weight: 600;">Bloom & Stem Floristry</p>
+        <p class="body-sm" style="color: var(--color-muted);">Brooklyn, NY — Est. 2016</p>
+      </div>
+      <div>
+        <p class="body-sm" style="font-weight: 600;">Bridal Bouquets</p>
+        <p class="body-sm" style="color: var(--color-muted);">Ceremony & Reception</p>
+      </div>
+      <div>
+        <p class="body-sm" style="font-weight: 600;">Seasonal Arrangements</p>
+        <p class="body-sm" style="color: var(--color-muted);">Floral Installations</p>
+      </div>
+      <a href="#contact" class="btn btn-link body-sm" style="font-weight: 600;">Get started <span class="arrow-icon">&nearr;</span></a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 3: FEATURE / VALUE PROPS
+     Asymmetric 2-column: (label) left, big statement + list right
+     Like Colby's (About) section
+     ============================================================ -->
+<section style="padding: clamp(80px, 10vw, 160px) 0; border-top: 1px solid var(--color-border);">
+  <div class="wrap">
+    <div style="display: grid; grid-template-columns: 1fr; gap: 40px;" class="asym-grid">
+      <style>
+        @media (min-width: 768px) {
+          .asym-grid { grid-template-columns: 280px 1fr !important; }
+        }
+      </style>
+      <!-- Left label -->
+      <div class="reveal reveal-left">
+        <p class="section-label">(Why Us)</p>
+      </div>
+      <!-- Right content -->
+      <div class="reveal">
+        <h2 class="display-lg" style="margin-bottom: clamp(40px, 5vw, 80px); max-width: 800px;">We grow, source, and arrange flowers that transform wedding days into living memories.</h2>
+        <p class="body-lg" style="color: var(--color-muted); max-width: 640px; margin-bottom: clamp(40px, 5vw, 60px);">From soil to ceremony, we cultivate relationships with local growers and select each stem at peak bloom. Our arrangements honor the rhythm of the seasons — peonies in late spring, dahlias in autumn, hellebores in winter — ensuring your wedding flowers feel rooted in the moment.</p>
+        <!-- Underlined value props -->
+        <div class="reveal-stagger" style="max-width: 520px;">
+          <div style="padding: 16px 0; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; gap: 12px;">
+            <span class="dot-primary"></span>
+            <p class="body-md" style="font-weight: 600;">Locally grown, sustainably sourced blooms</p>
+          </div>
+          <div style="padding: 16px 0; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; gap: 12px;">
+            <span class="dot-primary"></span>
+            <p class="body-md" style="font-weight: 600;">Seasonal palettes tailored to your wedding month</p>
+          </div>
+          <div style="padding: 16px 0; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; gap: 12px;">
+            <span class="dot-primary"></span>
+            <p class="body-md" style="font-weight: 600;">Hand-conditioned stems for all-day freshness</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 4: TEXT / BRAND STORY
+     Full-bleed image placeholder with overlay text
+     ============================================================ -->
+<section id="about" style="position: relative; min-height: 70vh; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+  <!-- Background image -->
+  <div style="position: absolute; inset: 0; z-index: 0;">
+    <img src="https://images.unsplash.com/photo-1478146059778-26028b07395a?w=1600&q=80" alt="Florist workshop with loose stems and greenery" style="width: 100%; height: 100%; object-fit: cover;" />
+    <div style="position: absolute; inset: 0; background: rgba(250,247,242,0.82);"></div>
+  </div>
+  <div class="reveal" style="text-align: center; z-index: 1; padding: 80px 20px;">
+    <p class="mega" style="color: var(--color-text); opacity: 0.06; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); white-space: nowrap; pointer-events: none;">BLOOM. atelier</p>
+    <p class="section-label" style="margin-bottom: 24px;">(Our Story)</p>
+    <h2 class="display-lg" style="max-width: 700px; margin: 0 auto 32px;">From greenhouse to grand celebration</h2>
+    <p class="body-lg" style="color: var(--color-muted); max-width: 560px; margin: 0 auto;">We began as a small flower farm in the Hudson Valley, growing heritage roses and wildflowers. Today, our Brooklyn studio combines that grower's intuition with refined design — arranging weddings that feel as natural as the fields where our blooms begin.</p>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 5: SHOWCASE / SERVICES
+     Large service names stacked with rules between (Colby-style)
+     ============================================================ -->
+<section id="services" style="padding: clamp(80px, 10vw, 160px) 0;">
+  <div class="wrap">
+    <!-- Section header -->
+    <div style="display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: clamp(40px, 6vw, 80px);" class="asym-grid-2">
+      <style>
+        @media (min-width: 768px) {
+          .asym-grid-2 { grid-template-columns: 280px 1fr !important; }
+          .asym-grid-2 .s-heading { text-align: right; }
+        }
+      </style>
+      <p class="section-label">(Services)</p>
+      <p class="display-sm s-heading" style="font-style: italic; color: var(--color-muted);">From bridal blooms to<br>grand floral architecture</p>
+    </div>
+
+    <!-- Service rows -->
+    <div>
+      <div class="service-row reveal">
+        <h3 class="heading-lg">Bridal Florals</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end;" class="hide-mobile">
+          <span class="pill">Bridal Bouquet</span>
+          <span class="pill">Bridesmaid Posies</span>
+          <span class="pill">Boutonnieres</span>
+          <span class="pill">Flower Crowns</span>
+          <span class="pill">Corsages</span>
+        </div>
+      </div>
+      <div class="service-row reveal">
+        <h3 class="heading-lg">Ceremony Florals</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end;" class="hide-mobile">
+          <span class="pill">Altar Arches</span>
+          <span class="pill">Chuppah Garlands</span>
+          <span class="pill">Aisle Markers</span>
+          <span class="pill">Pew Ends</span>
+          <span class="pill">Petal Toss</span>
+        </div>
+      </div>
+      <div class="service-row reveal">
+        <h3 class="heading-lg">Reception Design</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end;" class="hide-mobile">
+          <span class="pill">Centerpieces</span>
+          <span class="pill">Table Runners</span>
+          <span class="pill">Bud Vases</span>
+          <span class="pill">Cake Florals</span>
+          <span class="pill">Napkin Blooms</span>
+        </div>
+      </div>
+      <div class="service-row reveal">
+        <h3 class="heading-lg">Grand Installations</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end;" class="hide-mobile">
+          <span class="pill">Suspended Clouds</span>
+          <span class="pill">Flower Walls</span>
+          <span class="pill">Staircase Garlands</span>
+          <span class="pill">Entrance Urns</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 6: GALLERY / BENTO GRID
+     Colby-style bento with image placeholders + text cards
+     ============================================================ -->
+<section id="portfolio" style="padding: clamp(60px, 8vw, 120px) 0; background: var(--color-surface);">
+  <div class="wrap">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: clamp(30px, 4vw, 60px); flex-wrap: wrap; gap: 16px;">
+      <p class="section-label">(Portfolio)</p>
+      <a href="#" class="btn btn-link body-sm" style="font-weight: 500;">View all work <span class="arrow-icon">&nearr;</span></a>
+    </div>
+    <div class="bento">
+      <!-- Card 1: text card -->
+      <div class="portfolio-bento-text reveal reveal-left" style="background: var(--color-bg); border-radius: 8px; padding: clamp(24px, 3vw, 40px); display: flex; flex-direction: column; justify-content: space-between; min-height: 320px;">
+        <div>
+          <p class="heading-md" style="margin-bottom: 8px;">Consultation & Palette</p>
+          <p class="body-sm" style="color: var(--color-muted);">Selecting Your Seasonal Blooms</p>
+        </div>
+        <p class="body-md" style="font-weight: 500; max-width: 340px;">We walk through flower varieties in season for your wedding month, building a color palette rooted in what nature offers at its best.</p>
+      </div>
+      <!-- Card 2: image -->
+      <div class="reveal reveal-right reveal-scale" style="border-radius: 8px; min-height: 320px; overflow: hidden;">
+        <img src="https://images.unsplash.com/photo-1522748906645-95d8adfd52c7?w=800&q=80" alt="Elegant garden wedding reception with lush floral centerpieces" style="width: 100%; height: 100%; object-fit: cover;" />
+      </div>
+      <!-- Card 3: image -->
+      <div class="reveal reveal-left reveal-scale" style="border-radius: 8px; min-height: 320px; overflow: hidden;">
+        <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80" alt="Wedding ceremony arch covered in cascading white flowers and greenery" style="width: 100%; height: 100%; object-fit: cover;" />
+      </div>
+      <!-- Card 4: text card -->
+      <div class="portfolio-bento-text reveal reveal-right" style="background: var(--color-bg); border-radius: 8px; padding: clamp(24px, 3vw, 40px); display: flex; flex-direction: column; justify-content: space-between; min-height: 320px;">
+        <div>
+          <p class="heading-md" style="margin-bottom: 8px;">Installation Day</p>
+          <p class="body-sm" style="color: var(--color-muted);">Where Months of Planning Bloom</p>
+        </div>
+        <p class="body-md" style="font-weight: 500; max-width: 340px;">Our team arrives hours before your guests, conditioning every stem and placing each arrangement so the space feels effortlessly alive.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 7: METRICS
+     Large numbers, editorial layout with dot accents
+     ============================================================ -->
+<section style="padding: clamp(80px, 10vw, 140px) 0; border-top: 1px solid var(--color-border);">
+  <div class="wrap">
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px 20px;" class="metrics-grid reveal-stagger">
+      <style>
+        @media (min-width: 768px) {
+          .metrics-grid { grid-template-columns: repeat(4, 1fr) !important; }
+        }
+      </style>
+      <div>
+        <p class="display-xl" style="color: var(--color-text);">250<span style="color: var(--color-primary);">+</span></p>
+        <div class="hr" style="margin: 16px 0;"></div>
+        <p class="body-sm" style="color: var(--color-muted);">Weddings Designed</p>
+      </div>
+      <div>
+        <p class="display-xl" style="color: var(--color-text);">8</p>
+        <div class="hr" style="margin: 16px 0;"></div>
+        <p class="body-sm" style="color: var(--color-muted);">Years of Artistry</p>
+      </div>
+      <div>
+        <p class="display-xl" style="color: var(--color-text);">15</p>
+        <div class="hr" style="margin: 16px 0;"></div>
+        <p class="body-sm" style="color: var(--color-muted);">Editorial Features</p>
+      </div>
+      <div>
+        <p class="display-xl" style="color: var(--color-text);">100<span style="color: var(--color-primary);">%</span></p>
+        <div class="hr" style="margin: 16px 0;"></div>
+        <p class="body-sm" style="color: var(--color-muted);">Bespoke Creations</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 8: TEAM
+     Asymmetric grid with large image placeholders
+     ============================================================ -->
+<section style="padding: clamp(80px, 10vw, 140px) 0; background: var(--color-surface);">
+  <div class="wrap">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: clamp(40px, 6vw, 80px); flex-wrap: wrap; gap: 16px;">
+      <p class="section-label">(Team)</p>
+      <p class="display-sm" style="font-style: italic; color: var(--color-muted); text-align: right;">The people behind<br>every petal</p>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr; gap: 24px;" class="team-grid reveal-stagger">
+      <style>
+        @media (min-width: 768px) {
+          .team-grid { grid-template-columns: repeat(3, 1fr) !important; }
+        }
+      </style>
+      <div>
+        <div style="background: var(--color-bg); aspect-ratio: 3/4; margin-bottom: 20px; overflow: hidden;">
+          <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&amp;q=80" alt="Elena Marín, founder and lead designer" width="800" height="1067" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+        </div>
+        <p class="heading-sm" style="margin-bottom: 4px;">Elena Marín</p>
+        <p class="body-sm" style="color: var(--color-muted);">Founder & Lead Designer</p>
+        <div class="hr" style="margin-top: 16px;"></div>
+      </div>
+      <div>
+        <div style="background: var(--color-bg); aspect-ratio: 3/4; margin-bottom: 20px; overflow: hidden;">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&amp;q=80" alt="Julien Reeves, senior floral artist" width="800" height="1067" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+        </div>
+        <p class="heading-sm" style="margin-bottom: 4px;">Julien Reeves</p>
+        <p class="body-sm" style="color: var(--color-muted);">Senior Floral Artist</p>
+        <div class="hr" style="margin-top: 16px;"></div>
+      </div>
+      <div>
+        <div style="background: var(--color-bg); aspect-ratio: 3/4; margin-bottom: 20px; overflow: hidden;">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&amp;q=80" alt="Sophie Anh, client experience" width="800" height="1067" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+        </div>
+        <p class="heading-sm" style="margin-bottom: 4px;">Sophie Anh</p>
+        <p class="body-sm" style="color: var(--color-muted);">Client Experience</p>
+        <div class="hr" style="margin-top: 16px;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 9: TESTIMONIALS
+     Large quote, editorial style
+     ============================================================ -->
+<section id="testimonials" style="padding: clamp(80px, 10vw, 160px) 0; border-top: 1px solid var(--color-border);">
+  <div class="wrap">
+    <div style="display: grid; grid-template-columns: 1fr; gap: 40px;" class="asym-grid-3">
+      <style>
+        @media (min-width: 768px) {
+          .asym-grid-3 { grid-template-columns: 280px 1fr !important; }
+        }
+      </style>
+      <p class="section-label reveal reveal-left" style="display: block;">(Kind Words)</p>
+      <div>
+        <!-- Quote 1 -->
+        <div class="reveal" style="padding-bottom: clamp(40px, 5vw, 64px); border-bottom: 1px solid var(--color-border); margin-bottom: clamp(40px, 5vw, 64px);">
+          <p class="display-md" style="font-style: italic; margin-bottom: 32px; max-width: 700px;">"Bloom & Stem didn't just arrange flowers — they translated our love story into a botanical masterpiece."</p>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <span class="dot-primary"></span>
+            <p class="body-sm" style="font-weight: 600;">Clara & Thomas</p>
+            <p class="body-sm" style="color: var(--color-muted);">— Garden Estate Wedding</p>
+          </div>
+        </div>
+        <!-- Quote 2 -->
+        <div class="reveal" style="padding-bottom: clamp(40px, 5vw, 64px); border-bottom: 1px solid var(--color-border); margin-bottom: clamp(40px, 5vw, 64px);">
+          <p class="display-md" style="font-style: italic; margin-bottom: 32px; max-width: 700px;">"The attention to detail was extraordinary. They planned how light would change throughout the day."</p>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <span class="dot-primary"></span>
+            <p class="body-sm" style="font-weight: 600;">James & Michael</p>
+            <p class="body-sm" style="color: var(--color-muted);">— Vineyard Celebration</p>
+          </div>
+        </div>
+        <!-- Quote 3 -->
+        <div class="reveal">
+          <p class="display-md" style="font-style: italic; margin-bottom: 32px; max-width: 700px;">"Working with Elena felt like collaborating with an artist. She created something beyond our imagination."</p>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <span class="dot-primary"></span>
+            <p class="body-sm" style="font-weight: 600;">Priya & Sanjay</p>
+            <p class="body-sm" style="color: var(--color-muted);">— Coastal Intimate Wedding</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 10: PRICING
+     3 tiers, clean with highlighted middle
+     ============================================================ -->
+<section style="padding: clamp(80px, 10vw, 140px) 0; background: var(--color-surface);">
+  <div class="wrap">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: clamp(40px, 6vw, 80px); flex-wrap: wrap; gap: 16px;">
+      <p class="section-label">(Investment)</p>
+      <p class="body-md" style="color: var(--color-muted); max-width: 360px; text-align: right;">Each collection is a starting point — we tailor every detail to your vision.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr; gap: 16px;" class="price-grid">
+      <style>
+        @media (min-width: 768px) {
+          .price-grid { grid-template-columns: repeat(3, 1fr) !important; }
+        }
+      </style>
+      <!-- Petite -->
+      <div style="background: var(--color-bg); padding: clamp(28px, 3vw, 44px); display: flex; flex-direction: column; border-radius: 4px;">
+        <p class="label-lg" style="color: var(--color-primary); margin-bottom: 24px;">Petite</p>
+        <p class="display-md" style="margin-bottom: 4px;">$2,500</p>
+        <p class="body-sm" style="color: var(--color-muted); margin-bottom: 32px;">starting from</p>
+        <div class="hr" style="margin-bottom: 24px;"></div>
+        <ul style="flex: 1; margin-bottom: 32px;">
+          <li class="body-sm" style="padding: 10px 0; border-bottom: 1px solid var(--color-border);">Bridal bouquet</li>
+          <li class="body-sm" style="padding: 10px 0; border-bottom: 1px solid var(--color-border);">2 bridesmaid bouquets</li>
+          <li class="body-sm" style="padding: 10px 0; border-bottom: 1px solid var(--color-border);">Boutonnieres (up to 4)</li>
+          <li class="body-sm" style="padding: 10px 0; border-bottom: 1px solid var(--color-border);">Ceremony accent pieces</li>
+          <li class="body-sm" style="padding: 10px 0;">Design consultation</li>
+        </ul>
+        <a href="#contact" class="btn btn-md btn-ghost" style="width: 100%; justify-content: center;">Inquire <span class="arrow-icon">&nearr;</span></a>
+      </div>
+      <!-- Grand (featured) -->
+      <div style="background: var(--color-text); color: var(--color-bg); padding: clamp(28px, 3vw, 44px); display: flex; flex-direction: column; border-radius: 4px;">
+        <p class="label-lg" style="color: var(--color-primary); margin-bottom: 24px;">Grand</p>
+        <p class="display-md" style="margin-bottom: 4px;">$6,500</p>
+        <p class="body-sm" style="opacity: 0.5; margin-bottom: 32px;">starting from</p>
+        <div style="height: 1px; background: rgba(250,247,242,0.12); margin-bottom: 24px;"></div>
+        <ul style="flex: 1; margin-bottom: 32px;">
+          <li class="body-sm" style="padding: 10px 0; border-bottom: 1px solid rgba(250,247,242,0.08);">Everything in Petite</li>
+          <li class="body-sm" style="padding: 10px 0; border-bottom: 1px solid rgba(250,247,242,0.08);">Full ceremony arch</li>
+          <li class="body-sm" style="padding: 10px 0; border-bottom: 1px solid rgba(250,247,242,0.08);">Centerpieces (up to 12)</li>
+          <li class="body-sm" style="padding: 10px 0; border-bottom: 1px solid rgba(250,247,242,0.08);">Welcome table styling</li>
+          <li class="body-sm" style="padding: 10px 0; border-bottom: 1px solid rgba(250,247,242,0.08);">Setup & breakdown</li>
+          <li class="body-sm" style="padding: 10px 0;">Mood board & palette</li>
+        </ul>
+        <a href="#contact" class="btn btn-md" style="width: 100%; justify-content: center; background: var(--color-bg); color: var(--color-text); border-color: var(--color-bg);">Inquire <span class="arrow-icon">&nearr;</span></a>
+      </div>
+      <!-- Atelier -->
+      <div style="background: var(--color-bg); padding: clamp(28px, 3vw, 44px); display: flex; flex-direction: column; border-radius: 4px;">
+        <p class="label-lg" style="color: var(--color-primary); margin-bottom: 24px;">Atelier</p>
+        <p class="display-md" style="margin-bottom: 4px;">$12,000</p>
+        <p class="body-sm" style="color: var(--color-muted); margin-bottom: 32px;">starting from</p>
+        <div class="hr" style="margin-bottom: 24px;"></div>
+        <ul style="flex: 1; margin-bottom: 32px;">
+          <li class="body-sm" style="padding: 10px 0; border-bottom: 1px solid var(--color-border);">Everything in Grand</li>
+          <li class="body-sm" style="padding: 10px 0; border-bottom: 1px solid var(--color-border);">Venue site visit</li>
+          <li class="body-sm" style="padding: 10px 0; border-bottom: 1px solid var(--color-border);">Custom installations</li>
+          <li class="body-sm" style="padding: 10px 0; border-bottom: 1px solid var(--color-border);">Rehearsal dinner florals</li>
+          <li class="body-sm" style="padding: 10px 0; border-bottom: 1px solid var(--color-border);">Day-of coordinator</li>
+          <li class="body-sm" style="padding: 10px 0;">Unlimited revisions</li>
+        </ul>
+        <a href="#contact" class="btn btn-md btn-ghost" style="width: 100%; justify-content: center;">Inquire <span class="arrow-icon">&nearr;</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 11: FAQ
+     ============================================================ -->
+<section style="padding: clamp(80px, 10vw, 140px) 0; border-top: 1px solid var(--color-border);">
+  <div class="wrap">
+    <div style="display: grid; grid-template-columns: 1fr; gap: 40px;" class="faq-layout">
+      <style>
+        @media (min-width: 768px) {
+          .faq-layout { grid-template-columns: 280px 1fr !important; }
+          .faq-content { max-width: 640px; }
+        }
+      </style>
+      <p class="section-label">(FAQ)</p>
+      <div class="faq-content">
+        <div class="faq-item" style="border-top: 1px solid var(--color-border);">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="heading-sm">How far in advance should we book?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="5 8 10 13 15 8"/></svg>
+          </button>
+          <div class="faq-answer body-md" style="color: var(--color-muted);">We recommend 9–12 months before your wedding date. For peak season (May–October), earlier is better. We occasionally accommodate shorter timelines.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="heading-sm">Do you travel for destination weddings?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="5 8 10 13 15 8"/></svg>
+          </button>
+          <div class="faq-answer body-md" style="color: var(--color-muted);">Absolutely. We've designed weddings across the country and internationally. Travel fees are quoted per-event and included in your custom proposal.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="heading-sm">Can we request specific flowers?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="5 8 10 13 15 8"/></svg>
+          </button>
+          <div class="faq-answer body-md" style="color: var(--color-muted);">Of course. We'll work with your wish list while advising on seasonal availability and the best alternatives.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="heading-sm">What is your design process?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="5 8 10 13 15 8"/></svg>
+          </button>
+          <div class="faq-answer body-md" style="color: var(--color-muted);">It starts with a complimentary consultation. From there, we develop a mood board and floral palette, followed by a detailed proposal with refinement rounds.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="heading-sm">Do you handle setup and breakdown?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="5 8 10 13 15 8"/></svg>
+          </button>
+          <div class="faq-answer body-md" style="color: var(--color-muted);">Yes. All Grand and Atelier collections include full setup and post-event breakdown. For Petite collections, setup can be added.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="heading-sm">Can you work with our planner?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="5 8 10 13 15 8"/></svg>
+          </button>
+          <div class="faq-answer body-md" style="color: var(--color-muted);">We love collaborating with planners and often do. We're happy to join vendor meetings and coordinate logistics.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="heading-sm">What happens to flowers after the event?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="5 8 10 13 15 8"/></svg>
+          </button>
+          <div class="faq-answer body-md" style="color: var(--color-muted);">Guests can take home centerpieces. We also partner with local organizations to donate remaining flowers.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="heading-sm">Do you handle non-wedding events?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="5 8 10 13 15 8"/></svg>
+          </button>
+          <div class="faq-answer body-md" style="color: var(--color-muted);">Weddings are our specialty, but we occasionally take on editorial shoots and intimate celebrations that align with our aesthetic.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 12: LOCATION
+     ============================================================ -->
+<section style="padding: clamp(80px, 10vw, 140px) 0; background: var(--color-surface);">
+  <div class="wrap">
+    <div style="display: grid; grid-template-columns: 1fr; gap: 40px;" class="loc-grid">
+      <style>
+        @media (min-width: 768px) {
+          .loc-grid { grid-template-columns: 1fr 1fr !important; }
+        }
+      </style>
+      <div style="background: var(--color-bg); min-height: 400px; display: flex; align-items: center; justify-content: center; border-radius: 4px;">
+        <p class="label-lg" style="color: var(--color-muted);">[ Map embed ]</p>
+      </div>
+      <div style="display: flex; flex-direction: column; justify-content: center;">
+        <p class="section-label" style="margin-bottom: 24px;">(Visit)</p>
+        <h2 class="display-sm" style="margin-bottom: 32px;">The Bloom & Stem Atelier</h2>
+        <div class="hr" style="margin-bottom: 32px;"></div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 40px;">
+          <div>
+            <p class="body-sm" style="font-weight: 600; margin-bottom: 8px;">Address</p>
+            <p class="body-sm" style="color: var(--color-muted);">142 Garden Lane, Studio 3<br>Brooklyn, NY 11201</p>
+          </div>
+          <div>
+            <p class="body-sm" style="font-weight: 600; margin-bottom: 8px;">Hours</p>
+            <p class="body-sm" style="color: var(--color-muted);">Tue – Fri: 10am – 6pm<br>Sat: By appointment</p>
+          </div>
+          <div>
+            <p class="body-sm" style="font-weight: 600; margin-bottom: 8px;">Email</p>
+            <p class="body-sm" style="color: var(--color-muted);">hello@bloomstem.com</p>
+          </div>
+          <div>
+            <p class="body-sm" style="font-weight: 600; margin-bottom: 8px;">Phone</p>
+            <p class="body-sm" style="color: var(--color-muted);">(718) 555-0192</p>
+          </div>
+        </div>
+        <a href="#" class="btn btn-md btn-ghost" style="width: fit-content;">Get Directions <span class="arrow-icon">&nearr;</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 13: CTA
+     Bold, full-width with mega type
+     ============================================================ -->
+<section style="padding: clamp(100px, 12vw, 200px) 0; background: var(--color-text); color: var(--color-bg); text-align: center; position: relative; overflow: hidden;">
+  <p class="mega" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); white-space: nowrap; opacity: 0.04; pointer-events: none;">BLOOM&STEM</p>
+  <div class="wrap" style="position: relative; z-index: 1;">
+    <p class="section-label" style="color: var(--color-primary); margin-bottom: 32px;">(Let's Create)</p>
+    <h2 class="display-lg" style="max-width: 700px; margin: 0 auto 40px;">Your wedding deserves flowers as extraordinary as your love</h2>
+    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+      <a href="#contact" class="btn btn-lg" style="background: var(--color-bg); color: var(--color-text); border-color: var(--color-bg);">Book a Consultation <span class="arrow-icon">&nearr;</span></a>
+      <a href="#portfolio" class="btn btn-lg" style="background: transparent; color: var(--color-bg); border: 1px solid rgba(250,247,242,0.2);">View Portfolio</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 14: CONTACT
+     ============================================================ -->
+<section id="contact" style="padding: clamp(80px, 10vw, 140px) 0; border-top: 1px solid var(--color-border);">
+  <div class="wrap">
+    <div style="display: grid; grid-template-columns: 1fr; gap: 60px;" class="contact-grid">
+      <style>
+        @media (min-width: 768px) {
+          .contact-grid { grid-template-columns: 1fr 1fr !important; }
+        }
+      </style>
+      <div>
+        <p class="section-label" style="margin-bottom: 24px;">(Contact)</p>
+        <h2 class="display-md" style="margin-bottom: 40px;">Start the<br>Conversation</h2>
+        <form onsubmit="return false;" style="display: flex; flex-direction: column; gap: 24px;">
+          <input type="text" class="flat-input" placeholder="Your name" />
+          <input type="email" class="flat-input" placeholder="Email address" />
+          <input type="text" class="flat-input" placeholder="Wedding date (approx.)" />
+          <textarea class="flat-input" placeholder="Tell us about your vision..."></textarea>
+          <button type="submit" class="btn btn-lg btn-primary" style="width: fit-content; margin-top: 8px;">Send Inquiry <span class="arrow-icon">&nearr;</span></button>
+        </form>
+      </div>
+      <div style="display: flex; flex-direction: column; justify-content: flex-end;">
+        <div style="margin-bottom: 40px;">
+          <p class="body-sm" style="font-weight: 600; margin-bottom: 6px;">Email</p>
+          <p class="body-md" style="color: var(--color-muted);">hello@bloomstem.com</p>
+        </div>
+        <div style="margin-bottom: 40px;">
+          <p class="body-sm" style="font-weight: 600; margin-bottom: 6px;">Phone</p>
+          <p class="body-md" style="color: var(--color-muted);">(718) 555-0192</p>
+        </div>
+        <div style="margin-bottom: 40px;">
+          <p class="body-sm" style="font-weight: 600; margin-bottom: 6px;">Studio</p>
+          <p class="body-md" style="color: var(--color-muted);">142 Garden Lane, Studio 3<br>Brooklyn, NY 11201</p>
+        </div>
+        <div style="margin-bottom: 40px;">
+          <p class="body-sm" style="font-weight: 600; margin-bottom: 12px;">Follow Along</p>
+          <div style="display: flex; gap: 16px;">
+            <a href="#" class="btn btn-link body-sm">Instagram <span class="arrow-icon">&nearr;</span></a>
+            <a href="#" class="btn btn-link body-sm">Pinterest <span class="arrow-icon">&nearr;</span></a>
+          </div>
+        </div>
+        <div class="hr" style="margin-bottom: 24px;"></div>
+        <p class="display-sm" style="font-style: italic; color: var(--color-primary);">"We respond within 24 hours. We can't wait to hear your story."</p>
+        <p class="body-sm" style="color: var(--color-muted); margin-top: 12px;">— Elena Marín</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 15: FOOTER
+     ============================================================ -->
+<footer style="background: var(--color-text); color: var(--color-bg); padding-top: clamp(60px, 8vw, 100px); padding-bottom: 32px;">
+  <div class="wrap">
+    <!-- Top: mega brand -->
+    <div style="margin-bottom: clamp(40px, 6vw, 80px); overflow: hidden;">
+      <p style="font-family: var(--font-brand); font-size: clamp(3rem, 2rem + 6vw, 9rem); font-weight: 300; line-height: 0.9; letter-spacing: -0.03em; opacity: 0.15; white-space: nowrap;">BLOOM&STEM</p>
+    </div>
+    <!-- Nav grid -->
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; margin-bottom: clamp(40px, 6vw, 80px);" class="footer-grid">
+      <style>
+        @media (min-width: 768px) {
+          .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr !important; }
+        }
+      </style>
+      <div>
+        <p style="font-family: var(--font-brand); font-size: 1.3rem; font-weight: 400; margin-bottom: 16px;">Bloom & Stem</p>
+        <p class="body-sm" style="opacity: 0.4; max-width: 260px; line-height: 1.6;">Bespoke wedding floristry for couples who believe in the power of petals.</p>
+      </div>
+      <div>
+        <p class="label-lg" style="margin-bottom: 16px; opacity: 0.3;">Explore</p>
+        <ul style="display: flex; flex-direction: column; gap: 10px;">
+          <li><a href="#about" class="body-sm" style="opacity: 0.5;">About</a></li>
+          <li><a href="#services" class="body-sm" style="opacity: 0.5;">Services</a></li>
+          <li><a href="#portfolio" class="body-sm" style="opacity: 0.5;">Portfolio</a></li>
+          <li><a href="#testimonials" class="body-sm" style="opacity: 0.5;">Kind Words</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="label-lg" style="margin-bottom: 16px; opacity: 0.3;">Info</p>
+        <ul style="display: flex; flex-direction: column; gap: 10px;">
+          <li><a href="#contact" class="body-sm" style="opacity: 0.5;">Contact</a></li>
+          <li><a href="#" class="body-sm" style="opacity: 0.5;">FAQ</a></li>
+          <li><a href="#" class="body-sm" style="opacity: 0.5;">Press</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="label-lg" style="margin-bottom: 16px; opacity: 0.3;">Connect</p>
+        <ul style="display: flex; flex-direction: column; gap: 10px;">
+          <li><a href="#" class="body-sm" style="opacity: 0.5;">Instagram</a></li>
+          <li><a href="#" class="body-sm" style="opacity: 0.5;">Pinterest</a></li>
+          <li><a href="#" class="body-sm" style="opacity: 0.5;">The Bloom Journal</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- Bottom bar -->
+    <div style="border-top: 1px solid rgba(250,247,242,0.08); padding-top: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px;">
+      <p class="body-sm" style="opacity: 0.3;">&copy; 2026 Bloom & Stem. All rights reserved.</p>
+      <div style="display: flex; gap: 24px;">
+        <a href="#" class="body-sm" style="opacity: 0.3;">Privacy</a>
+        <a href="#" class="body-sm" style="opacity: 0.3;">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  /* ── FAQ toggle ── */
+  function toggleFaq(button) {
+    const answer = button.nextElementSibling;
+    const chevron = button.querySelector('.faq-chevron');
+    answer.classList.toggle('open');
+    chevron.classList.toggle('open');
+  }
+
+  /* ── Scroll-reveal via IntersectionObserver ── */
+  (function () {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    document
+      .querySelectorAll('.reveal, .reveal-stagger')
+      .forEach((el) => io.observe(el));
+  })();
+</script>
+
+</body>
+</html>

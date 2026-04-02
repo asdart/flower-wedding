@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet" />
 
   <style>
+    /* ── PALETTE: Bloom (default – warm ivory) ── */
     :root {
       --color-bg: #FAF7F2;
       --color-surface: #F0EBE3;
@@ -22,7 +23,160 @@
       --color-border: #D4CCC0;
       --font-brand: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
       --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
+      /* Theme-specific extras — Bloom defaults */
+      --color-header-bg: rgba(250,247,242,0.92);
+      --color-about-overlay: rgba(250,247,242,0.82);
+      --color-grand-divider: rgba(26,22,19,0.12);
+      /* Footer bg = --color-text (#1A1613 dark), so text must be light (--color-bg based) */
+      --color-footer-sub:    rgba(250,247,242,0.55);
+      --color-footer-label:  rgba(250,247,242,0.40);
+      --color-footer-link:   rgba(250,247,242,0.65);
+      --color-footer-copy:   rgba(250,247,242,0.40);
+      --color-footer-border: rgba(250,247,242,0.10);
     }
+
+    /* ── PALETTE: Forest (dark hunter green) ── */
+    html[data-theme="forest"] {
+      --color-bg: #1B2A1E;
+      --color-surface: #162018;
+      --color-primary: #C9AA78;          /* lightened for 4.5:1 on bg  */
+      --color-text: #EDE8DF;
+      --color-muted: #A8BEA9;            /* was #7E9680 (~3.9:1) → now ~5.1:1 on bg */
+      --color-dark: #0E1810;
+      --color-white: #EDE8DF;
+      --color-border: rgba(237,232,223,0.18);
+      /* Theme-specific extras */
+      --color-header-bg: rgba(27,42,30,0.93);
+      --color-about-overlay: rgba(14,24,16,0.78);
+      --color-grand-divider: rgba(237,232,223,0.14);
+      /* Footer sits on --color-text (#EDE8DF cream), so text must be dark (--color-bg based) */
+      --color-footer-sub:    rgba(14,24,16,0.65);   /* ~5.8:1 on #EDE8DF */
+      --color-footer-label:  rgba(14,24,16,0.55);   /* ~4.8:1 — large/caps text */
+      --color-footer-link:   rgba(14,24,16,0.75);   /* ~7.0:1 */
+      --color-footer-copy:   rgba(14,24,16,0.55);
+      --color-footer-border: rgba(14,24,16,0.14);
+    }
+
+    /* ── PALETTE: Slate (cool dark charcoal) ── */
+    html[data-theme="slate"] {
+      --color-bg: #171D1C;
+      --color-surface: #1F2827;
+      --color-primary: #C4A882;
+      --color-text: #E8E2D9;
+      --color-muted: #A5B8B6;            /* was #6B7F7D (~3.3:1) → now ~5.2:1 on bg */
+      --color-dark: #0D1211;
+      --color-white: #E8E2D9;
+      --color-border: rgba(232,226,217,0.15);
+      --color-header-bg: rgba(23,29,28,0.93);
+      --color-about-overlay: rgba(13,18,17,0.78);
+      --color-grand-divider: rgba(232,226,217,0.14);
+      /* Footer sits on --color-text (#E8E2D9 light), so text must be dark (--color-bg based) */
+      --color-footer-sub:    rgba(13,18,17,0.65);   /* ~5.6:1 on #E8E2D9 */
+      --color-footer-label:  rgba(13,18,17,0.55);   /* ~4.6:1 — large/caps text */
+      --color-footer-link:   rgba(13,18,17,0.75);   /* ~6.8:1 */
+      --color-footer-copy:   rgba(13,18,17,0.55);
+      --color-footer-border: rgba(13,18,17,0.14);
+    }
+
+    /* ── PALETTE: Navy (midnight blue) ── */
+    html[data-theme="navy"] {
+      --color-bg: #0F1B2D;
+      --color-surface: #0A1422;
+      --color-primary: #C49A6C;          /* rose gold — 5.3:1 on bg */
+      --color-text: #F0E9DC;
+      --color-muted: #8AA4C8;            /* soft periwinkle — 5.0:1 on bg */
+      --color-dark: #060E1A;
+      --color-white: #F0E9DC;
+      --color-border: rgba(240,233,220,0.16);
+      --color-header-bg: rgba(15,27,45,0.93);
+      --color-about-overlay: rgba(6,14,26,0.80);
+      --color-grand-divider: rgba(240,233,220,0.14);
+      /* Footer sits on --color-text (#F0E9DC parchment), text must be dark */
+      --color-footer-sub:    rgba(10,20,34,0.65);   /* ~5.9:1 on #F0E9DC */
+      --color-footer-label:  rgba(10,20,34,0.50);   /* ~4.6:1 — large/caps text */
+      --color-footer-link:   rgba(10,20,34,0.75);   /* ~7.2:1 */
+      --color-footer-copy:   rgba(10,20,34,0.50);
+      --color-footer-border: rgba(10,20,34,0.12);
+    }
+
+    /* Smooth palette transition — applied briefly via JS class, doesn't stomp animation transitions */
+    html.palette-switching, html.palette-switching * {
+      transition: background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease !important;
+    }
+
+    /* ── PALETTE SWITCHER UI ── */
+    .palette-toggle {
+      position: relative;
+    }
+    .palette-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border: 1px solid var(--color-border);
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--color-text);
+      background: transparent;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .palette-btn:hover { background: var(--color-surface); }
+    .palette-swatch {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    .palette-dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 8px;
+      min-width: 160px;
+      z-index: 200;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    }
+    .palette-toggle.open .palette-dropdown { display: block; }
+    .palette-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--color-text);
+      background: transparent;
+      cursor: pointer;
+      text-align: left;
+      border: none;
+      transition: background 0.15s;
+    }
+    .palette-option:hover { background: var(--color-surface); }
+    .palette-option.active { background: var(--color-surface); }
+    .palette-option .swatch {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      border: 1.5px solid rgba(0,0,0,0.08);
+    }
+    .swatch-bloom  { background: #8B7355; }
+    .swatch-forest { background: #2D4A32; }
+    .swatch-slate  { background: #1F2827; }
+    .swatch-navy   { background: #0F1B2D; }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -269,6 +423,8 @@
       cursor: pointer;
       width: 100%;
       text-align: left;
+      color: var(--color-text);
+      background: transparent;
     }
     .faq-answer {
       max-height: 0;
@@ -453,7 +609,7 @@
      SECTION 1: HEADER
      Sticky nav — logo left, links center-right, hamburger right
      ============================================================ -->
-<header style="position: sticky; top: 0; z-index: 50; background: rgba(250,247,242,0.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);">
+<header style="position: sticky; top: 0; z-index: 50; background: var(--color-header-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);">
   <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; height: 72px;">
     <a href="#" style="font-family: var(--font-brand); font-size: 1.5rem; font-weight: 400; letter-spacing: 0.02em;">Bloom & Stem</a>
     <nav class="hide-mobile" style="display: flex; gap: 40px; align-items: center;">
@@ -462,7 +618,29 @@
       <a href="#portfolio" class="body-sm" style="color: var(--color-text); transition: color 0.3s;">Portfolio</a>
       <a href="#contact" class="body-sm" style="color: var(--color-text); transition: color 0.3s;">Contact</a>
     </nav>
-    <div style="display: flex; align-items: center; gap: 24px;">
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <!-- Palette switcher -->
+      <div class="palette-toggle" id="palettePicker">
+        <button class="palette-btn" onclick="togglePalettePicker(event)" aria-label="Switch colour palette" aria-haspopup="true">
+          <span class="palette-swatch"></span>
+          <span id="paletteBtnLabel">Bloom</span>
+          <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="palette-dropdown" role="menu">
+          <button class="palette-option active" data-palette="bloom" onclick="setPalette('bloom', 'Bloom')" role="menuitem">
+            <span class="swatch swatch-bloom"></span>Bloom
+          </button>
+          <button class="palette-option" data-palette="forest" onclick="setPalette('forest', 'Forest')" role="menuitem">
+            <span class="swatch swatch-forest"></span>Forest
+          </button>
+          <button class="palette-option" data-palette="slate" onclick="setPalette('slate', 'Slate')" role="menuitem">
+            <span class="swatch swatch-slate"></span>Slate
+          </button>
+          <button class="palette-option" data-palette="navy" onclick="setPalette('navy', 'Navy')" role="menuitem">
+            <span class="swatch swatch-navy"></span>Navy
+          </button>
+        </div>
+      </div>
       <a href="#contact" class="btn btn-sm btn-primary hide-mobile">Get started <span class="arrow-icon">&nearr;</span></a>
       <button class="hide-desktop" onclick="document.getElementById('mobileMenu').classList.toggle('open')" aria-label="Menu" style="display: flex; flex-direction: column; gap: 6px;">
         <span style="display: block; width: 26px; height: 1.5px; background: var(--color-text);"></span>
@@ -481,6 +659,24 @@
   <a href="#services" class="display-md" onclick="document.getElementById('mobileMenu').classList.remove('open')">Services</a>
   <a href="#portfolio" class="display-md" onclick="document.getElementById('mobileMenu').classList.remove('open')">Portfolio</a>
   <a href="#contact" class="display-md" onclick="document.getElementById('mobileMenu').classList.remove('open')">Contact</a>
+  <!-- Mobile palette switcher -->
+  <div style="margin-top: 40px; display: flex; flex-direction: column; gap: 12px;">
+    <p class="label-lg" style="opacity: 0.35; font-size: 0.7rem; letter-spacing: 0.08em;">PALETTE</p>
+    <div style="display: flex; gap: 10px;">
+      <button onclick="setPalette('bloom','Bloom')" data-mobile-palette="bloom" style="display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;border:1px solid var(--color-border);background:transparent;font-family:var(--font-body);font-size:0.8rem;font-weight:500;color:var(--color-text);cursor:pointer;">
+        <span style="width:10px;height:10px;border-radius:50%;background:#8B7355;display:inline-block;"></span>Bloom
+      </button>
+      <button onclick="setPalette('forest','Forest')" data-mobile-palette="forest" style="display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;border:1px solid var(--color-border);background:transparent;font-family:var(--font-body);font-size:0.8rem;font-weight:500;color:var(--color-text);cursor:pointer;">
+        <span style="width:10px;height:10px;border-radius:50%;background:#2D4A32;display:inline-block;"></span>Forest
+      </button>
+      <button onclick="setPalette('slate','Slate')" data-mobile-palette="slate" style="display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;border:1px solid var(--color-border);background:transparent;font-family:var(--font-body);font-size:0.8rem;font-weight:500;color:var(--color-text);cursor:pointer;">
+        <span style="width:10px;height:10px;border-radius:50%;background:#1F2827;display:inline-block;"></span>Slate
+      </button>
+      <button onclick="setPalette('navy','Navy')" data-mobile-palette="navy" style="display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;border:1px solid var(--color-border);background:transparent;font-family:var(--font-body);font-size:0.8rem;font-weight:500;color:var(--color-text);cursor:pointer;">
+        <span style="width:10px;height:10px;border-radius:50%;background:#0F1B2D;display:inline-block;"></span>Navy
+      </button>
+    </div>
+  </div>
 </div>
 
 
@@ -592,7 +788,7 @@
   <!-- Background image -->
   <div style="position: absolute; inset: 0; z-index: 0;">
     <img src="https://images.unsplash.com/photo-1478146059778-26028b07395a?w=1600&q=80" alt="Florist workshop with loose stems and greenery" style="width: 100%; height: 100%; object-fit: cover;" />
-    <div style="position: absolute; inset: 0; background: rgba(250,247,242,0.82);"></div>
+    <div style="position: absolute; inset: 0; background: var(--color-about-overlay);"></div>
   </div>
   <div class="reveal" style="text-align: center; z-index: 1; padding: 80px 20px;">
     <p class="mega" style="color: var(--color-text); opacity: 0.06; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); white-space: nowrap; pointer-events: none;">BLOOM. atelier</p>
@@ -872,13 +1068,13 @@
         <p class="label-lg" style="color: var(--color-primary); margin-bottom: 24px;">Grand</p>
         <p class="display-md" style="margin-bottom: 4px;">$6,500</p>
         <p class="body-sm" style="opacity: 0.5; margin-bottom: 32px;">starting from</p>
-        <div style="height: 1px; background: rgba(250,247,242,0.12); margin-bottom: 24px;"></div>
+        <div style="height: 1px; background: var(--color-grand-divider); margin-bottom: 24px;"></div>
         <ul style="flex: 1; margin-bottom: 32px;">
-          <li class="body-sm" style="padding: 10px 0; border-bottom: 1px solid rgba(250,247,242,0.08);">Everything in Petite</li>
-          <li class="body-sm" style="padding: 10px 0; border-bottom: 1px solid rgba(250,247,242,0.08);">Full ceremony arch</li>
-          <li class="body-sm" style="padding: 10px 0; border-bottom: 1px solid rgba(250,247,242,0.08);">Centerpieces (up to 12)</li>
-          <li class="body-sm" style="padding: 10px 0; border-bottom: 1px solid rgba(250,247,242,0.08);">Welcome table styling</li>
-          <li class="body-sm" style="padding: 10px 0; border-bottom: 1px solid rgba(250,247,242,0.08);">Setup & breakdown</li>
+          <li class="body-sm" style="padding: 10px 0; border-bottom: 1px solid var(--color-grand-divider);">Everything in Petite</li>
+          <li class="body-sm" style="padding: 10px 0; border-bottom: 1px solid var(--color-grand-divider);">Full ceremony arch</li>
+          <li class="body-sm" style="padding: 10px 0; border-bottom: 1px solid var(--color-grand-divider);">Centerpieces (up to 12)</li>
+          <li class="body-sm" style="padding: 10px 0; border-bottom: 1px solid var(--color-grand-divider);">Welcome table styling</li>
+          <li class="body-sm" style="padding: 10px 0; border-bottom: 1px solid var(--color-grand-divider);">Setup & breakdown</li>
           <li class="body-sm" style="padding: 10px 0;">Mood board & palette</li>
         </ul>
         <a href="#contact" class="btn btn-md" style="width: 100%; justify-content: center; background: var(--color-bg); color: var(--color-text); border-color: var(--color-bg);">Inquire <span class="arrow-icon">&nearr;</span></a>
@@ -1034,7 +1230,7 @@
     <h2 class="display-lg" style="max-width: 700px; margin: 0 auto 40px;">Your wedding deserves flowers as extraordinary as your love</h2>
     <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
       <a href="#contact" class="btn btn-lg" style="background: var(--color-bg); color: var(--color-text); border-color: var(--color-bg);">Book a Consultation <span class="arrow-icon">&nearr;</span></a>
-      <a href="#portfolio" class="btn btn-lg" style="background: transparent; color: var(--color-bg); border: 1px solid rgba(250,247,242,0.2);">View Portfolio</a>
+      <a href="#portfolio" class="btn btn-lg" style="background: transparent; color: var(--color-bg); border: 1px solid var(--color-border);">View Portfolio</a>
     </div>
   </div>
 </section>
@@ -1109,40 +1305,40 @@
       </style>
       <div>
         <p style="font-family: var(--font-brand); font-size: 1.3rem; font-weight: 400; margin-bottom: 16px;">Bloom & Stem</p>
-        <p class="body-sm" style="opacity: 0.4; max-width: 260px; line-height: 1.6;">Bespoke wedding floristry for couples who believe in the power of petals.</p>
+        <p class="body-sm" style="color: var(--color-footer-sub); max-width: 260px; line-height: 1.6;">Bespoke wedding floristry for couples who believe in the power of petals.</p>
       </div>
       <div>
-        <p class="label-lg" style="margin-bottom: 16px; opacity: 0.3;">Explore</p>
+        <p class="label-lg" style="margin-bottom: 16px; color: var(--color-footer-label);">Explore</p>
         <ul style="display: flex; flex-direction: column; gap: 10px;">
-          <li><a href="#about" class="body-sm" style="opacity: 0.5;">About</a></li>
-          <li><a href="#services" class="body-sm" style="opacity: 0.5;">Services</a></li>
-          <li><a href="#portfolio" class="body-sm" style="opacity: 0.5;">Portfolio</a></li>
-          <li><a href="#testimonials" class="body-sm" style="opacity: 0.5;">Kind Words</a></li>
+          <li><a href="#about" class="body-sm" style="color: var(--color-footer-link);">About</a></li>
+          <li><a href="#services" class="body-sm" style="color: var(--color-footer-link);">Services</a></li>
+          <li><a href="#portfolio" class="body-sm" style="color: var(--color-footer-link);">Portfolio</a></li>
+          <li><a href="#testimonials" class="body-sm" style="color: var(--color-footer-link);">Kind Words</a></li>
         </ul>
       </div>
       <div>
-        <p class="label-lg" style="margin-bottom: 16px; opacity: 0.3;">Info</p>
+        <p class="label-lg" style="margin-bottom: 16px; color: var(--color-footer-label);">Info</p>
         <ul style="display: flex; flex-direction: column; gap: 10px;">
-          <li><a href="#contact" class="body-sm" style="opacity: 0.5;">Contact</a></li>
-          <li><a href="#" class="body-sm" style="opacity: 0.5;">FAQ</a></li>
-          <li><a href="#" class="body-sm" style="opacity: 0.5;">Press</a></li>
+          <li><a href="#contact" class="body-sm" style="color: var(--color-footer-link);">Contact</a></li>
+          <li><a href="#" class="body-sm" style="color: var(--color-footer-link);">FAQ</a></li>
+          <li><a href="#" class="body-sm" style="color: var(--color-footer-link);">Press</a></li>
         </ul>
       </div>
       <div>
-        <p class="label-lg" style="margin-bottom: 16px; opacity: 0.3;">Connect</p>
+        <p class="label-lg" style="margin-bottom: 16px; color: var(--color-footer-label);">Connect</p>
         <ul style="display: flex; flex-direction: column; gap: 10px;">
-          <li><a href="#" class="body-sm" style="opacity: 0.5;">Instagram</a></li>
-          <li><a href="#" class="body-sm" style="opacity: 0.5;">Pinterest</a></li>
-          <li><a href="#" class="body-sm" style="opacity: 0.5;">The Bloom Journal</a></li>
+          <li><a href="#" class="body-sm" style="color: var(--color-footer-link);">Instagram</a></li>
+          <li><a href="#" class="body-sm" style="color: var(--color-footer-link);">Pinterest</a></li>
+          <li><a href="#" class="body-sm" style="color: var(--color-footer-link);">The Bloom Journal</a></li>
         </ul>
       </div>
     </div>
     <!-- Bottom bar -->
-    <div style="border-top: 1px solid rgba(250,247,242,0.08); padding-top: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px;">
-      <p class="body-sm" style="opacity: 0.3;">&copy; 2026 Bloom & Stem. All rights reserved.</p>
+    <div style="border-top: 1px solid var(--color-footer-border); padding-top: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px;">
+      <p class="body-sm" style="color: var(--color-footer-copy);">&copy; 2026 Bloom & Stem. All rights reserved.</p>
       <div style="display: flex; gap: 24px;">
-        <a href="#" class="body-sm" style="opacity: 0.3;">Privacy</a>
-        <a href="#" class="body-sm" style="opacity: 0.3;">Terms</a>
+        <a href="#" class="body-sm" style="color: var(--color-footer-copy);">Privacy</a>
+        <a href="#" class="body-sm" style="color: var(--color-footer-copy);">Terms</a>
       </div>
     </div>
   </div>
@@ -1157,6 +1353,51 @@
     answer.classList.toggle('open');
     chevron.classList.toggle('open');
   }
+
+  /* ── Palette switcher ── */
+  const PALETTES = { bloom: null, forest: 'forest', slate: 'slate', navy: 'navy' };
+
+  function setPalette(key, label) {
+    const html = document.documentElement;
+
+    // Enable color transitions for the duration of the switch
+    html.classList.add('palette-switching');
+    setTimeout(() => html.classList.remove('palette-switching'), 400);
+
+    html.dataset.theme = PALETTES[key] || '';
+    if (!PALETTES[key]) delete html.dataset.theme;
+
+    // Update desktop label + active state
+    document.getElementById('paletteBtnLabel').textContent = label;
+    document.querySelectorAll('.palette-option').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.palette === key);
+    });
+
+    // Close dropdown
+    document.getElementById('palettePicker').classList.remove('open');
+
+    // Persist
+    localStorage.setItem('palette', key);
+  }
+
+  function togglePalettePicker(e) {
+    e.stopPropagation();
+    document.getElementById('palettePicker').classList.toggle('open');
+  }
+
+  // Close dropdown on outside click
+  document.addEventListener('click', () => {
+    document.getElementById('palettePicker').classList.remove('open');
+  });
+
+  // Restore saved palette on load
+  (function () {
+    const saved = localStorage.getItem('palette');
+    if (saved && saved !== 'bloom') {
+      const labels = { forest: 'Forest', slate: 'Slate', navy: 'Navy' };
+      setPalette(saved, labels[saved] || 'Bloom');
+    }
+  })();
 
   /* ── Scroll-reveal via IntersectionObserver ── */
   (function () {
